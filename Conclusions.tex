@@ -1,0 +1,20 @@
+\chapter{Conclusions and Future Perspectives}
+\label{cap5}
+\lhead{\textbf{CHAPTER 5.} \textit{Conclusions and Future Perspectives}}
+
+The idea at the heart of \textit{zkpoex} was sparked by a long-standing pain point in the Ethereum security scene: responsible disclosure is hard.  
+Researchers worry about exposing too much of an exploit, project teams often respond slowly, or not at all, and bug-bounty agreements can collapse into distrust. In DeFi, where immutable contracts control vast sums of money, that friction becomes dangerous: an unpatched bug can wipe out liquidity in minutes.  
+Our goal was, therefore, to build a neutral handshake between attacker and defender, one that proves a vulnerability exists without revealing how it works.
+
+The prototype shows that zero-knowledge receipts can certify the \emph{existence} of an exploit on real mainnet bytecode while hiding all private inputs.  
+The researcher produces a journal plus a 1kb Groth16 seal; the project owner verifies the receipt on-chain and sees only a Boolean flag and two Keccak hashes.  
+No calldata, no control-flow trace, no storage diff, yet the proof remains infallible.  
+
+Only one earlier prototype, zkPoEX \cite{zkpoex-old}, an ETH Denver hackathon PoC, attempted a similar idea as said in this thesis, but it was not yet generalizable as a tool to prove arbitrary exploits and offered no general condition engine or cycle-level profiling, making \textit{zkpoex} the first comprehensive step toward truly “provable exploits”.
+
+
+What makes the system technically novel? Rather than proving a whole block or a generic computation, \textit{zkpoex} pins a single EVM trace into the RISC Zero zkVM and evaluates user-supplied safety conditions inside the circuit.  
+
+Two directions look particularly promising. First, a formal model of the conditions engine could be submitted to an academic venue, providing a machine-checked guarantee that “condition true $\rightarrow$ exploit real” holds under all circumstances. Second, linking the receipt format with a bug-bounty escrow contract would let rewards flow automatically once a proof is verified, removing manual negotiations.
+Additionally, by transforming exploit disclosure into a private yet verifiable transaction, \textit{zkpoex} realigns incentives: researchers retain ownership of their discoveries, projects receive irrefutable evidence, and the bug bounty platforms can also solve spam issues. 
+The prototype thus hints at a future where offensive research and defensive engineering cooperate under the umbrella of zero-knowledge cryptography, making DeFi both safer and more collaborative.

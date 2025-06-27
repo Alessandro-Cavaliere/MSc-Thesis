@@ -1,0 +1,116 @@
+\documentclass[11pt,a4paper]{report}
+\input{packages}
+
+
+\begin{document}
+\pagestyle{fancy}
+\fancyfoot[C]{\thepage}
+\selectlanguage{english}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{titlepage}
+    \begin{center}
+        \begin{figure}
+            \includegraphics[width=3cm, height=3cm]{Images/unisaLogo.png}
+            \centering
+            \includegraphics[width=3cm, height=3cm]{Images/coimbra_logo.png}
+            \centering
+        \end{figure}
+        {\Large University of Salerno}\\[0.2truecm]
+        {\large Department of Computer Science}\\
+        \hrulefill
+        \vfill
+        {\large Master's Thesis in}\\[0.2truecm]
+        
+        {\large Cybersecurity}\\
+        \vfill\vfill
+        {\LARGE {\bf A Zero-Knowledge-based system for vulnerability disclosure through the generation of Proofs of Exploits found in Solidity Smart Contracts \\[0.4truecm]}}
+        
+        \vfill\vfill
+        
+        \ \ \ \ \ \ \ \ \ {\bf Supervisors} \hfill {\bf Candidate}\ \ \\
+        Prof. \text{ Christiancarmine Esposito} \hfill  \text{Alessandro Cavaliere} 
+        \begin{flushleft}
+        Prof. \text{ Naghmeh Ivaki} \\
+        Prof. \text{ Nuno Laranjeiro}
+        \end{flushleft}
+        
+        \vfill
+        \hrulefill 
+        \begin{center} Academic Year 2024/2025 \end{center}
+        
+    \end{center}
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%Begin Roman numbering
+\cleardoublepage
+\pagenumbering{Roman}    
+\setcounter{page}{1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\myemptypage
+\include{Abstract}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\cleardoublepage
+\myemptypage
+\cleardoublepage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begingroup
+    \pagestyle{plain}
+    \hypersetup{linkcolor=black}
+	\tableofcontents
+\endgroup
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cleardoublepage
+\phantomsection\addcontentsline{toc}{chapter}{List of Figures}
+\hypersetup{linkcolor=black} 
+\listoffigures %\listoffigures 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cleardoublepage
+\phantomsection\addcontentsline{toc}{chapter}{Code Listings}
+\hypersetup{linkcolor=black} 
+\lstlistoflistings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\cleardoublepage
+\myemptypage
+\pagenumbering{arabic}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %% Here are the chapters 
+\input{Chapter1}
+\input{Chapter2}
+\input{Chapter3}
+\input{Chapter4}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{Conclusions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\cleardoublepage
+\myemptypage
+\pagestyle{fancy}
+\fancyhead{}
+\phantomsection\addcontentsline{toc}{chapter}{References}
+\renewcommand{\bibname}{References}
+\Urlmuskip=0mu plus 4mu
+\bibliographystyle{unsrt}
+\bibliography{bibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

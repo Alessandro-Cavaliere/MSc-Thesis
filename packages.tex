@@ -1,0 +1,219 @@
+\usepackage[utf8]{inputenc}
+\usepackage[big]{titlesec}
+\usepackage[italian,english]{babel}
+\usepackage{graphicx}
+\usepackage{cite}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[italian]{minitoc}% per gli accenti
+\usepackage{fancybox}
+\usepackage{fancyhdr}
+\usepackage{verbatim}
+\usepackage{url}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{makeidx}
+\usepackage{comment}
+\usepackage[a4paper, total={5in,8in}]{geometry}
+\usepackage{etoolbox}
+\usepackage{tabularx}  
+
+\usepackage{epigraph}         
+\setlength{\epigraphwidth}{0.80\textwidth}  
+\setlength{\epigraphrule}{0pt}          
+\renewcommand{\textflush}{flushright}      
+\renewcommand{\epigraphsize}{\Large\itshape}
+\renewcommand{\sourceflush}{flushright}  
+
+
+\renewcommand{\arraystretch}{1.2} 
+\DeclareTextFontCommand{\textcourier}{\fontfamily{phv}\selectfont}
+
+\renewcommand\lstlistlistingname{Code Listings}
+
+\newcommand\myemptypage{
+    \null
+    \thispagestyle{empty}
+    \addtocounter{page}{-1}
+    \newpage
+    }
+    
+    \newcommand\emptypage{
+    \null
+    \addtocounter{page}{-1}
+    \newpage
+    }
+
+\makeatletter
+\newcommand*\bigcdot{\mathpalette\bigcdot@{.5}}
+\newcommand*\bigcdot@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
+\makeatother
+%%%%Url settings%%%%%%%
+\usepackage[breaklinks=true]{hyperref} 
+\def\UrlBreaks{\do\/\do-\do\_}
+
+%%%%%%%%%%%%%%%%%
+
+%%%%Footnote settings%%%%
+\usepackage{chngcntr}
+\counterwithout{footnote}{chapter}
+\renewcommand{\thefootnote}{\textbf{\arabic{footnote}}}
+\usepackage[flushmargin]{footmisc}
+\addtolength{\footnotesep}{1mm} % change to 1mm
+%%%%%%%%%%%%%%%%%
+
+\renewcommand{\citeform}[1]{\textbf{#1}}
+
+
+
+\pagestyle{plain}
+\fancyhf{}
+
+%Definizione var footnotemark per poter colorare i numeri riferiti ai footnote
+\makeatletter
+\def\@footnotecolor{red}
+\define@key{Hyp}{footnotecolor}{%
+ \HyColor@HyperrefColor{#1}\@footnotecolor%
+}
+\patchcmd{\@footnotemark}{\hyper@linkstart{link}}{\hyper@linkstart{footnote}}{}{}
+\makeatother
+
+
+%Settaggio colori e stili per link,footnote e url
+\hypersetup{
+colorlinks=true,
+linkcolor=red,     
+urlcolor=blue,
+citecolor=[RGB]{0,0,255},
+footnotecolor=red,
+}
+\usepackage{enumitem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%Settaggio colori e funzioni per 
+\usepackage{listings} %code highlighter
+\usepackage{upquote}
+\usepackage{color}
+\definecolor{editorGray}{rgb}{0.95, 0.95, 0.95}
+\definecolor{editorOcher}{rgb}{1, 0.5, 0} % #FF7F00 -> rgb(239, 169, 0)    
+\definecolor{editorGreen}{rgb}{0, 0.5, 0} % #007C00 -> rgb(0, 124, 0)
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\definecolor{yellowFunction}{RGB}{247,173,78}
+\definecolor{greenComment}{RGB}{89,127,70}
+\definecolor{orangeWords}{RGB}{184,94,45}
+\definecolor{purpleWords}{RGB}{138,110,158}
+\definecolor{greyWords}{RGB}{80,80,83}
+
+
+%% ----------------------------------------
+%% Custom listings: JSX (already present),
+%% plus Rust and TOML for Chapter 3
+%% ----------------------------------------
+
+%% ----------------------------------------------------------
+%% Vivid listings for Rust, Solidity and TOML
+%% ----------------------------------------------------------
+\definecolor{kwRust}   {rgb}{0.02,0.28,0.82}   % strong cobalt
+\definecolor{ndRust}   {rgb}{0.90,0.30,0.07}   % bright vermilion
+\definecolor{kwSol}    {rgb}{0.10,0.55,0.10}   % vivid green
+\definecolor{ndSol}    {rgb}{0.75,0.34,0.96}   % purple
+\definecolor{kwToml}   {rgb}{0.82,0.42,0.04}   % orange
+\definecolor{commentFG}{rgb}{0.38,0.38,0.38}   % mid-grey
+\definecolor{stringFG} {rgb}{0.02,0.56,0.45}   % teal
+
+%% ---------------------------  Rust  ---------------------------
+\lstdefinelanguage{rust}{
+  sensitive=true,
+  morekeywords={
+    as,async,await,break,const,continue,crate,else,enum,extern,false,fn,for,
+    if,impl,in,let,loop,match,mod,move,mut,pub,ref,return,self,Self,static,
+    struct,super,trait,true,type,unsafe,use,where,while,
+    Result,Option,Some,None,Ok,Err,&str,,Box,decode,unwrap,transact_call,new,assert,matches,derive,Serialize,Deserialize,tokio,test,run\_evm
+  },
+  % highlight attribute identifiers rather than the literal "#["
+  emph={},
+  emphstyle=\color{ndRust}\bfseries,
+  keywordstyle   = \color{kwRust}\bfseries,
+  ndkeywords     ={u8,u16,u32,u64,usize,Vec,hex,i8,i16,i32,i64,isize,
+                   f32,f64,bool,char,String,U256,B256,H160,H256},
+  ndkeywordstyle = \color{ndRust}\bfseries,
+  identifierstyle= \color{black},
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle   = \color{commentFG}\ttfamily,
+  stringstyle    = \color{stringFG}\ttfamily,
+  morestring=[b]",
+}
+
+
+%% -------------------------  Solidity  -------------------------
+\lstdefinelanguage{solidity}{
+  sensitive=true,
+  morekeywords={
+    pragma,solidity,contract,interface,library,import,using,is,struct,enum,
+    event,modifier,function,constructor,fallback,receive,return,returns,
+    mapping,storage,memory,calldata,if,else,for,while,do,break,continue,throw,
+    try,catch,emit,revert,assembly,let,switch,case,default,public,external,
+    internal,private,view,pure,payable,const,override,virtual,immutable,
+    anonymous,indexed
+  },
+  keywordstyle   = \color{kwSol}\bfseries,
+  ndkeywords={
+    address,bool,string,bytes,byte,bytes1,bytes2,bytes3,bytes4,bytes5,
+    bytes6,bytes7,bytes8,bytes9,bytes10,bytes11,bytes12,bytes13,bytes14,
+    bytes15,bytes16,bytes17,bytes18,bytes19,bytes20,bytes21,bytes22,
+    bytes23,bytes24,bytes25,bytes26,bytes27,bytes28,bytes29,bytes30,
+    bytes31,bytes32,int,int8,int16,int24,int32,int40,int48,int56,int64,
+    int72,int80,int88,int96,int104,int112,int120,int128,int136,int144,
+    int152,int160,int168,int176,int184,int192,int200,int208,int216,int224,
+    int232,int240,int248,int256,uint,uint8,uint16,uint24,uint32,uint40,
+    uint48,uint56,uint64,uint72,uint80,uint88,uint96,uint104,uint112,uint120,
+    uint128,uint136,uint144,uint152,uint160,uint168,uint176,uint184,uint192,
+    uint200,uint208,uint216,uint224,uint232,uint240,uint248,uint256,wei,
+    gwei,ether,seconds,minutes,hours,days,weeks,years
+  },
+  ndkeywordstyle = \color{ndSol}\bfseries,
+  identifierstyle= \color{black},
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle   = \color{commentFG}\ttfamily,
+  stringstyle    = \color{stringFG}\ttfamily,
+  morestring=[b]",
+  morestring=[b]'
+}
+
+%% ---------------------------  TOML  ---------------------------
+\lstdefinelanguage{toml}{
+  sensitive=true,
+  comment=[l]{\#},
+  commentstyle     = \color{commentFG}\ttfamily,
+  stringstyle      = \color{stringFG}\ttfamily,
+  morestring=[b]",
+  ndkeywords       = {true,false},
+  ndkeywordstyle   = \color{ndRust}\bfseries,
+  keywords         = {package,dependencies,channel,components,profile,version,edition,
+                      resolver,members,features,default-features},
+  keywordstyle     = \color{kwToml}\bfseries,
+  identifierstyle  = \color{black}
+}
+
+%% ------------------------  Global style  -----------------------
+\lstset{
+  language      = rust,          % default
+  basicstyle    = \ttfamily\small,
+  columns       = fullflexible,
+  keepspaces    = true,
+  showstringspaces = false,
+  tabsize       = 2,
+  frame         = single,
+  framerule     = 0.2pt,
+  xleftmargin   = 1.5ex,
+  xrightmargin  = 1.5ex,
+  numbers       = left,
+  numberstyle   = \scriptsize\color{commentFG},
+  numbersep     = 6pt
+}
